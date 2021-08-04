@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "temp-devices-manager"
+version = "0.1.0"
+description = "TBD"
+authors = ["Mauricio Garcia <maurigarcia88@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+fastapi = "^0.61"
+pytest = "^6.2.4"
+SQLAlchemy = "^1.4.22"
+dependency-injector = "^4.35.0"
+PyYAML = "^5.4.1"
+uvicorn = {extras = ["standard"], version = "^0.14.0"}
+requests = "^2.26.0"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.9.2"
+jupyter = "^1.0.0"
+matplotlib = "^3.4.2"
+autopep8 = "^1.5.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "app:main"

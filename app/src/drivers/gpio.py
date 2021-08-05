@@ -4,14 +4,14 @@ class GpioOutputDriver:
         self._state = None
 
     @property
-    def state(self) -> bool:
+    def value(self) -> bool:
         # code to read pin state or just return internal variable self._state
         return self._state
 
-    @state.setter
-    def state(self, val: bool):
+    @value.setter
+    def value(self, value: bool):
         # code to set pin state
-        self._state = val
+        self._state = value
 
 
 if __name__ == "__main__":

@@ -1,7 +1,9 @@
 import dependency_injector.containers as containers
 import dependency_injector.providers as providers
-from src.services.drivers_access_services import (
-    GpioOutputDriversService, SiliconThermalDriversService)
+
+from src.core.settings import settings
+from src.services.silicon_thermal_service import SiliconThermalDriversService
+from src.services.gpio_service import GpioOutputDriversService
 
 
 class Configs(containers.DeclarativeContainer):
@@ -25,12 +27,5 @@ class GpioDriversContainer(containers.DeclarativeContainer):
     )
 
 
-if __name__ == "__main__":
-    st_file_path = "../config/silicon_thermals_config.yaml"
-    Configs.silicon_thermals_config.from_yaml(st_file_path)
-    st_service = SiliconThermalDriversContainer.service()
-    st_driver = st_service.get_silicon_thermal_driver_by_evk_name("tiger_99")
-
-    gpio_file_path = "../config/gpio_config.yaml"
-    Configs.gpio_config.from_yaml(gpio_file_path)
-    gpio_service = GpioDriversContainer.service()
+Configs.silicon_thermals_config.from_yaml(settings.SILICONTHERMALSCONFIG)
+Configs.gpio_config.from_yaml(settings.GPIOCONFIG)

@@ -2,8 +2,8 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    SILICONTHERMALSCONFIG: str
-    GPIOCONFIG: str
+    EVKSCONFIGFILE: str
+    PARAMSCONFIGFILE: str
 
 
 # FIXME env_ setting

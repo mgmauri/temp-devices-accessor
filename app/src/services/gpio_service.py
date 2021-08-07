@@ -2,7 +2,6 @@ from typing import MutableMapping, Optional
 
 import src.services.base_service as base_service
 from src.drivers.gpio import GpioOutputDriver
-from src.schemas.gpio import BaseGpioGetter, BaseGpioSetter
 
 
 class GpioOutputDriversService(base_service.BaseService):
@@ -11,7 +10,7 @@ class GpioOutputDriversService(base_service.BaseService):
     ) -> None:
         super().__init__()
         self.drivers_by_evk_name = {}
-        for pin_number, evk_name in config_parameters.items():
+        for evk_name, pin_number in config_parameters.items():
             self.drivers_by_evk_name[evk_name] = GpioOutputDriver(
                 pin_number
             )
@@ -23,16 +22,16 @@ class GpioOutputDriversService(base_service.BaseService):
         return self.drivers_by_evk_name.get(evk_name, None)
 
     def get_value_by_evk(
-        self, gpio_getter: BaseGpioGetter
+        self, evk_name: str
     ) -> Optional[bool]:
-        driver = self.get_drivers_by_evk_name(gpio_getter.evk_name)
+        driver = self.get_drivers_by_evk_name(evk_name)
         if driver is not None:
             return driver.value
         return None
-    
+
     def set_value_by_evk(
-        self, gpio_setter: BaseGpioSetter
+        self, evk_name: str, value: bool
     ) -> None:
-        driver = self.get_drivers_by_evk_name(gpio_setter.evk_name)
+        driver = self.get_drivers_by_evk_name(evk_name)
         if driver is not None:
-            driver.value = gpio_setter.value
+            driver.value = value

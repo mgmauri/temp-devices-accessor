@@ -1,0 +1,19 @@
+# =================================================================
+# Silicon Thermal and compressor GPIO config by evk. 
+# Model
+# <evk_name>:
+#   com_number: <int>    # silicon thermal serial com number
+#   pin_number: <int>    # gpio output pin number for compressor
+# =================================================================
+
+orca_9:
+  com_number: 1
+  pin_number: 2
+
+tiger_99:
+  com_number: 3
+  pin_number: 4
+
+tiger_18:
+  com_number: 5
+  pin_number: 6

@@ -6,6 +6,7 @@ from src.services.containers import (GpioDriversContainer,
 
 def get_silicon_thermal_drivers_service() -> SiliconThermalDriversService:
     silicon_thermal_drivers_service = SiliconThermalDriversContainer.service()
+    print(f"{id(silicon_thermal_drivers_service)=}")
     return silicon_thermal_drivers_service
 
 
@@ -16,4 +17,6 @@ def get_gpio_drivers_service() -> GpioOutputDriversService:
 
 if __name__ == "__main__":
     st_s = get_silicon_thermal_drivers_service()
-    print(f"{st_s.drivers_by_evk_name.keys()=}")
+    print(f"{st_s.drivers_by_evk_name.items()=}")
+    gpio_s = get_gpio_drivers_service()
+    print(f"{gpio_s.drivers_by_evk_name.items()}")

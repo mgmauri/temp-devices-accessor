@@ -2,8 +2,6 @@ from typing import MutableMapping, Optional
 
 import src.services.base_service as base_service
 from src.drivers.temperature import SerialComSiliconThermalDriver
-from src.schemas.temperature import (BaseTemperatureGetter,
-                                     BaseTemperatureSetter)
 
 
 class SiliconThermalDriversService(base_service.BaseService):
@@ -12,7 +10,7 @@ class SiliconThermalDriversService(base_service.BaseService):
     ) -> None:
         super().__init__()
         self.drivers_by_evk_name = {}
-        for com_number, evk_name in config_parameters.items():
+        for evk_name, com_number in config_parameters.items():
             driver = SerialComSiliconThermalDriver(com_number)
             try:
                 driver.connected = True
@@ -22,22 +20,26 @@ class SiliconThermalDriversService(base_service.BaseService):
             self.drivers_by_evk_name[evk_name] = driver
         # FIXME add logs
 
-    def get_driver(
+    def _get_driver(
         self, evk_name: str
     ) -> Optional[SerialComSiliconThermalDriver]:
         return self.drivers_by_evk_name.get(evk_name, None)
 
     def set_temperature_by_evk(
-        self, temperature_setter: BaseTemperatureSetter
+        self, evk_name: str, temperature: float
     ) -> None:
-        driver = self.get_driver(temperature_setter.evk_name)
+        driver = self._get_driver(evk_name)
         if driver is not None:
-            driver.temperature = temperature_setter.temperature
+            driver.temperature = temperature
 
     def get_temperature_by_evk(
-        self, temperature_getter: BaseTemperatureGetter
+        self, evk_name: str
     ) -> Optional[float]:
-        driver = self.get_driver(temperature_getter.evk_name)
+        driver = self._get_driver(evk_name)
         if driver is not None:
             return driver.temperature
         return None
+
+    def is_valid_evk(self, evk_name: str) -> bool:
+        print(f"evks={self.drivers_by_evk_name.keys()}")
+        return evk_name in self.drivers_by_evk_name.keys()

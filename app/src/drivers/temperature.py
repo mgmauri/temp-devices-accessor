@@ -29,6 +29,7 @@ class TemperatureDriver(abc.ABC):
 class SerialComSiliconThermalDriver(TemperatureDriver):
     def __init__(self, com_number: int) -> None:
         super().__init__()
+        self._com_number = com_number
         self._temperature = None
         self.logger.debug(f"SerialComSiliconThermalDriver({com_number=})")
 
@@ -39,6 +40,9 @@ class SerialComSiliconThermalDriver(TemperatureDriver):
     @temperature.setter
     def temperature(self, val: float) -> None:
         self._temperature = val
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self._com_number})"
 
 
 if __name__ == "__main__":

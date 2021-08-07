@@ -13,7 +13,10 @@ class GpioOutputDriver:
         # code to set pin state
         self._state = value
 
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self._pin_number})"
+
 
 if __name__ == "__main__":
     relays_controller = GpioOutputDriver(pin_number=2)
-    relays_controller.relay_0_status
+    print(f"{relays_controller.value=}")

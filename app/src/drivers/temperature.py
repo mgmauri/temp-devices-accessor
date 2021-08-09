@@ -31,7 +31,6 @@ class SerialComSiliconThermalDriver(TemperatureDriver):
         super().__init__()
         self._com_number = com_number
         self._temperature = None
-        self.logger.debug(f"SerialComSiliconThermalDriver({com_number=})")
 
     @property
     def temperature(self) -> int:

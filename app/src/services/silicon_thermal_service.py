@@ -15,7 +15,6 @@ class SiliconThermalDriversService(base_service.BaseService):
             try:
                 driver.connected = True
             except Exception:
-                self.logger.error(f"Error on {com_number=}")
                 raise(RuntimeError)
             self.drivers_by_evk_name[evk_name] = driver
         # FIXME add logs

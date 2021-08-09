@@ -16,22 +16,26 @@ class GpioOutputDriversService(base_service.BaseService):
             )
         # FIXME add logs
 
-    def get_driver_by_evk_name(
+    def _get_driver(
         self, evk_name: str
     ) -> Optional[GpioOutputDriver]:
         return self.drivers_by_evk_name.get(evk_name, None)
 
+    def set_value_by_evk(
+        self, evk_name: str, value: bool
+    ) -> None:
+        driver = self._get_driver(evk_name)
+        if driver is not None:
+            driver.value = value
+
     def get_value_by_evk(
         self, evk_name: str
     ) -> Optional[bool]:
-        driver = self.get_drivers_by_evk_name(evk_name)
+        driver = self._get_driver(evk_name)
         if driver is not None:
             return driver.value
         return None
 
-    def set_value_by_evk(
-        self, evk_name: str, value: bool
-    ) -> None:
-        driver = self.get_drivers_by_evk_name(evk_name)
-        if driver is not None:
-            driver.value = value
+    def is_valid_evk(self, evk_name: str) -> bool:
+        print(f"evks={self.drivers_by_evk_name.keys()}")
+        return evk_name in self.drivers_by_evk_name.keys()

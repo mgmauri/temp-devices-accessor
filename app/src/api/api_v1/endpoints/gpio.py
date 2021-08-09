@@ -15,7 +15,6 @@ def get_gpio_value(
         get_gpio_drivers_service
     )
 ) -> Any:
-    print(f"{gpio_service.is_valid_evk(evk_name)=}")
     if gpio_service.is_valid_evk(evk_name):
         return gpio_service.get_value_by_evk(evk_name)
     else:

@@ -41,5 +41,4 @@ class SiliconThermalDriversService(base_service.BaseService):
         return None
 
     def is_valid_evk(self, evk_name: str) -> bool:
-        print(f"evks={self.drivers_by_evk_name.keys()}")
         return evk_name in self.drivers_by_evk_name.keys()

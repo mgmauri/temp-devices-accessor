@@ -15,7 +15,6 @@ def get_temperature(
         get_silicon_thermal_drivers_service
     )
 ) -> Any:
-    print(f"{temperature_service.is_valid_evk(evk_name)=}")
     if temperature_service.is_valid_evk(evk_name):
         return temperature_service.get_temperature_by_evk(evk_name)
     else:

@@ -19,4 +19,3 @@ class GpioOutputDriver:
 
 if __name__ == "__main__":
     relays_controller = GpioOutputDriver(pin_number=2)
-    print(f"{relays_controller.value=}")

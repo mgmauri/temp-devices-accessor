@@ -46,5 +46,4 @@ class SerialComSiliconThermalDriver(TemperatureDriver):
 
 
 if __name__ == "__main__":
-    print("Hi VSCODE")
     st = SerialComSiliconThermalDriver(12)

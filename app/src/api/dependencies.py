@@ -9,6 +9,6 @@ def get_silicon_thermal_drivers_service() -> SiliconThermalDriversService:
     return silicon_thermal_drivers_service
 
 
-def get_gpio_drivers_service() -> GpioOutputDriversService:
-    gpio_drivers_service = GpioDriversContainer.service()
-    return gpio_drivers_service
+def get_gpio_output_drivers_service() -> GpioOutputDriversService:
+    gpio_output_drivers_service = GpioDriversContainer.service()
+    return gpio_output_drivers_service

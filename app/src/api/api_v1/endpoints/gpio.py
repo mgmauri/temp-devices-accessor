@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get("/gpio_output/{evk_name}")
-def get_gpio_output_value(
+def get_value_by_evk(
     evk_name: str,
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
         get_gpio_output_drivers_service
@@ -22,7 +22,7 @@ def get_gpio_output_value(
 
 
 @router.post("/gpio_output/{evk_name}")
-def set_gpio_output_value(
+def set_value_by_evk(
     evk_name: str,
     value: bool,
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
@@ -35,3 +35,12 @@ def set_gpio_output_value(
         )
     else:
         raise EvkNameNotFound
+
+
+@router.get("/gpio_output/")
+def get_all_gpio_outputs_value(
+    gpio_output_drivers_service: GpioOutputDriversService = Depends(
+        get_gpio_output_drivers_service
+    )
+) -> Any:
+    return gpio_output_drivers_service.get_all_gpio_outputs_value()

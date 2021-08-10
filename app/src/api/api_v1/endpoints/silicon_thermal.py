@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get("/silicon_thermal/{evk_name}")
-def get_temperature(
+def get_temperature_by_evk(
     evk_name: str,
     silicon_thermal_drivers_service: SiliconThermalDriversService = Depends(
         get_silicon_thermal_drivers_service
@@ -22,7 +22,7 @@ def get_temperature(
 
 
 @router.post("/silicon_thermal/{evk_name}")
-def set_temperature(
+def set_temperature_by_evk(
     evk_name: str,
     temperature: float,
     silicon_thermal_drivers_service: SiliconThermalDriversService = Depends(

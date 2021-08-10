@@ -42,7 +42,7 @@ class SiliconThermalDriversService(base_service.BaseService):
     def is_valid_evk(self, evk_name: str) -> bool:
         return evk_name in self.drivers_by_evk_name.keys()
 
-    def get_all_evks_temperature(self) -> Dict:
+    def get_all_silicon_thermals_temperature(self) -> Dict:
         temperatures_by_evk = {}
         for evk_name, driver in self.drivers_by_evk_name.items():
             temperatures_by_evk[evk_name] = driver.temperature

@@ -7,5 +7,5 @@ class Settings(BaseSettings):
 
 
 # FIXME env_ setting
-env_ = "/home/mgarcia/Projects/TempDevicesControl/temp-devices-manager/.env"
+env_ = "/home/projects/temp-devices-manager/.env"
 settings = Settings(_env_file=env_)

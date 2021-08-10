@@ -8,7 +8,7 @@ from src.api.exceptions import EvkNameNotFound
 router = APIRouter()
 
 
-@router.get("/temperature/{evk_name}")
+@router.get("/silicon_thermal/{evk_name}")
 def get_temperature(
     evk_name: str,
     silicon_thermal_drivers_service: SiliconThermalDriversService = Depends(
@@ -21,7 +21,7 @@ def get_temperature(
         raise EvkNameNotFound
 
 
-@router.post("/temperature/{evk_name}")
+@router.post("/silicon_thermal/{evk_name}")
 def set_temperature(
     evk_name: str,
     temperature: float,
@@ -35,3 +35,13 @@ def set_temperature(
         )
     else:
         raise EvkNameNotFound
+
+
+@router.get("/silicon_thermal/")
+def get_all_silicon_thermals_temperature(
+    silicon_thermal_drivers_service: SiliconThermalDriversService = Depends(
+        get_silicon_thermal_drivers_service
+    )
+) -> Any:
+    return silicon_thermal_drivers_service.\
+        get_all_silicon_thermals_temperature()

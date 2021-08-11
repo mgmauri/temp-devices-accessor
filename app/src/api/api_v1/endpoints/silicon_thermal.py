@@ -21,7 +21,7 @@ def get_temperature_by_evk(
         raise EvkNameNotFound
 
 
-@router.post("/silicon_thermal/{evk_name}")
+@router.put("/silicon_thermal/{evk_name}")
 def set_temperature_by_evk(
     evk_name: str,
     temperature: float,

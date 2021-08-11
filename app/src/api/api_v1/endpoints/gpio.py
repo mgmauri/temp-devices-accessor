@@ -21,7 +21,7 @@ def get_value_by_evk(
         raise EvkNameNotFound
 
 
-@router.post("/gpio_output/{evk_name}")
+@router.put("/gpio_output/{evk_name}")
 def set_value_by_evk(
     evk_name: str,
     value: bool,

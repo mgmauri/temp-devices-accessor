@@ -1,7 +1,7 @@
 from typing import Dict, MutableMapping, Optional
 
 import src.services.base_service as base_service
-from src.drivers.temperature import SerialComSiliconThermalDriver
+from src.drivers.silicon_thermal import SerialComSiliconThermalDriver
 
 
 class SiliconThermalDriversService(base_service.BaseService):

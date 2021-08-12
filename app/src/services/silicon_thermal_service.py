@@ -1,7 +1,7 @@
 from typing import Dict, MutableMapping, Optional
 
 import src.services.base_service as base_service
-from src.drivers.silicon_thermal import SerialComSiliconThermalDriver
+from src.drivers.silicon_thermal import SerialPortSiliconThermalDriver
 
 
 class SiliconThermalDriversService(base_service.BaseService):
@@ -10,8 +10,8 @@ class SiliconThermalDriversService(base_service.BaseService):
     ) -> None:
         super().__init__()
         self.drivers_by_evk_name = {}
-        for evk_name, com_number in config_parameters.items():
-            driver = SerialComSiliconThermalDriver(com_number)
+        for evk_name, port in config_parameters.items():
+            driver = SerialPortSiliconThermalDriver(port)
             try:
                 driver.connected = True
             except Exception:
@@ -21,7 +21,7 @@ class SiliconThermalDriversService(base_service.BaseService):
 
     def _get_driver(
         self, evk_name: str
-    ) -> Optional[SerialComSiliconThermalDriver]:
+    ) -> Optional[SerialPortSiliconThermalDriver]:
         return self.drivers_by_evk_name.get(evk_name, None)
 
     def set_temperature_by_evk(

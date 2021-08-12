@@ -11,7 +11,7 @@ class Configs(containers.DeclarativeContainer):
 Configs.config.from_yaml(settings.EVKSCONFIGFILE)
 
 Configs.silicon_thermals_config.from_dict({
-        evk_name: data["com_number"]
+        evk_name: data["port"]
         for evk_name, data in Configs.config().items()
     })
 Configs.gpio_config.from_dict({

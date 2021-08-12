@@ -1,7 +1,7 @@
-class SerialComSiliconThermalDriver:
-    def __init__(self, com_number: int) -> None:
+class SerialPortSiliconThermalDriver:
+    def __init__(self, port: str) -> None:
         self._connected = None
-        self._com_number = com_number
+        self._port = port
         self._temperature = None
 
     @property
@@ -21,8 +21,8 @@ class SerialComSiliconThermalDriver:
         self._temperature = val
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self._com_number})"
+        return f"{self.__class__.__name__}({self._port})"
 
 
 if __name__ == "__main__":
-    st = SerialComSiliconThermalDriver(12)
+    st = SerialPortSiliconThermalDriver(12)

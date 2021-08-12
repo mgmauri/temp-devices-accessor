@@ -7,13 +7,13 @@
 # =================================================================
 
 evk1:
-  com_number: 1
+  port: 1
   pin_number: 31
 
 evk2:
-  com_number: 3
+  port: 3
   pin_number: 33
 
 evk3:
-  com_number: 5
+  port: 5
   pin_number: 35

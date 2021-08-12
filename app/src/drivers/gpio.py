@@ -1,31 +1,21 @@
-import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BOARD)
-
-
 class GpioOutputDriver:
     def __init__(self, pin_number: int) -> None:
         self._pin_number = pin_number
-        self._value = None
-        GPIO.setup(self._pin_number, GPIO.OUT)
-        GPIO.output(self._pin_number, True)
+        self._state = None
 
     @property
     def value(self) -> bool:
-        self._value = GPIO.input(self._pin_number)
-        return self._value
+        # code to read pin state or just return internal variable self._state
+        return self._state
 
     @value.setter
-    def value(self, val: bool):
-        self._state = val
-        GPIO.output(self._pin_number, val)
+    def value(self, value: bool):
+        # code to set pin state
+        self._state = value
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self._pin_number})"
 
 
 if __name__ == "__main__":
-    pin1 = GpioOutputDriver(pin_number=31)
-    pin2 = GpioOutputDriver(pin_number=33)
-    pin3 = GpioOutputDriver(pin_number=35)
-    pin4 = GpioOutputDriver(pin_number=37)
-    pin5 = GpioOutputDriver(pin_number=32)
-    pin6 = GpioOutputDriver(pin_number=36)
-    pin7 = GpioOutputDriver(pin_number=38)
-    pin8 = GpioOutputDriver(pin_number=40)
+    relays_controller = GpioOutputDriver(pin_number=2)

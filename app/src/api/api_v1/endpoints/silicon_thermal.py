@@ -37,7 +37,7 @@ def set_temperature_by_evk(
         raise EvkNameNotFound
 
 
-@router.get("/evks/silicon_thermals")
+@router.get("/evks/silicon_thermal")
 def get_all_evks_silicon_thermals_temperature(
     silicon_thermal_drivers_service: SiliconThermalDriversService = Depends(
         get_silicon_thermal_drivers_service

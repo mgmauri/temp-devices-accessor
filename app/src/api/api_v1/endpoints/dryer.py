@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get("/evks/{evk_name}/dryer")
-def get_drier_state_by_evk(
+def get_dryer_state_by_evk(
     evk_name: str,
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
         get_gpio_output_drivers_service
@@ -37,7 +37,7 @@ def set_dryer_state_by_evk(
         raise EvkNameNotFound
 
 
-@router.get("/evks/dryers")
+@router.get("/evks/dryer")
 def get_all_evks_dryer_state(
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
         get_gpio_output_drivers_service

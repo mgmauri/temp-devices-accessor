@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Any
 from fastapi import APIRouter, Depends
 from src.api.dependencies import get_silicon_thermal_drivers_service
 from src.services.silicon_thermal_service import SiliconThermalDriversService
@@ -20,9 +20,8 @@ def get_is_valid_evk_name(
 
 @router.get("/evks")
 def get_valid_evk_names(
-    evk_name: str,
     silicon_thermal_drivers_service: SiliconThermalDriversService = Depends(
         get_silicon_thermal_drivers_service
     )
-) -> Dict:
-    return silicon_thermal_drivers_service.drivers_by_evk_name.keys()
+) -> Any:
+    return set(silicon_thermal_drivers_service.drivers_by_evk_name.keys())

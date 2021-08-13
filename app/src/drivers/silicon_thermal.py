@@ -1,24 +1,35 @@
+import random
+
+ramdom_boundary = 1
+initial_temperature = 30
+
+
 class SerialPortSiliconThermalDriver:
     def __init__(self, port: str) -> None:
-        self._connected = None
+        self._is_open = True
         self._port = port
-        self._temperature = None
+        self._target_temperature = initial_temperature
+        self._reached_temperature = initial_temperature
 
     @property
-    def connected(self):
-        return self._connected
-
-    @connected.setter
-    def connected(self, value: bool) -> None:
-        self._connected = value
+    def is_open(self) -> bool:
+        return self._is_open
 
     @property
-    def temperature(self) -> int:
-        return self._temperature
+    def target_temperature(self) -> float:
+        return self._target_temperature
 
-    @temperature.setter
-    def temperature(self, val: float) -> None:
-        self._temperature = val
+    @target_temperature.setter
+    def target_temperature(self, value: float) -> None:
+        self._target_temperature = value
+
+    @property
+    def reached_temperature(self) -> float:
+        self._reached_temperature = self._target_temperature + random.uniform(
+            -ramdom_boundary,
+            ramdom_boundary,
+        )
+        return self._reached_temperature
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self._port})"
@@ -26,3 +37,4 @@ class SerialPortSiliconThermalDriver:
 
 if __name__ == "__main__":
     st = SerialPortSiliconThermalDriver(12)
+    print(st.reached_temperature)

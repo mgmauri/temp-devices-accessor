@@ -8,7 +8,7 @@ from src.services.gpio_service import GpioOutputDriversService
 router = APIRouter()
 
 
-@router.get("/evks/{evk_name}/dryer")
+@router.get("/drivers/dryers/{evk_name}/value")
 def get_dryer_state_by_evk(
     evk_name: str,
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
@@ -21,7 +21,7 @@ def get_dryer_state_by_evk(
         raise EvkNameNotFound
 
 
-@router.put("/evks/{evk_name}/dryer")
+@router.put("/drivers/dryers/{evk_name}/value")
 def set_dryer_state_by_evk(
     evk_name: str,
     value: bool,
@@ -37,7 +37,7 @@ def set_dryer_state_by_evk(
         raise EvkNameNotFound
 
 
-@router.get("/evks/dryer")
+@router.get("/drivers/dryers")
 def get_all_evks_dryer_state(
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
         get_gpio_output_drivers_service

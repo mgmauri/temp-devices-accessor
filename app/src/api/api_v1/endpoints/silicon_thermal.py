@@ -1,9 +1,11 @@
 from typing import Any
 
-from src.api.dependencies import get_silicon_thermal_drivers_service
 from fastapi import APIRouter, Depends
-from src.services.silicon_thermal_service import SiliconThermalDriversService
+from fastapi.param_functions import Query
+from src.api.dependencies import get_silicon_thermal_drivers_service
 from src.api.exceptions import EvkNameNotFound
+from src.core.configs import OperationConfig
+from src.services.silicon_thermal_service import SiliconThermalDriversService
 
 router = APIRouter()
 
@@ -26,7 +28,10 @@ def get_reached_temperature_by_evk(
 @router.put("/evks/{evk_name}/silicon_thermal/target_temperature")
 def set_target_temperature_by_evk(
     evk_name: str,
-    temperature: float,
+    temperature: float = Query(...,
+                               gt=OperationConfig.config.minimum_temperature(),
+                               lt=OperationConfig.config.maximum_temperature()
+                               ),
     silicon_thermal_drivers_service: SiliconThermalDriversService = Depends(
         get_silicon_thermal_drivers_service
     )

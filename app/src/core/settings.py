@@ -1,4 +1,5 @@
 from pydantic import BaseSettings
+import os
 
 
 class Settings(BaseSettings):
@@ -7,5 +8,5 @@ class Settings(BaseSettings):
 
 
 # FIXME env_ setting
-env_ = "/home/projects/temp-devices-manager/.env"
-settings = Settings(_env_file=env_)
+_env = os.environ.get("PROJ_TDM") + "/.env"
+settings = Settings(_env)

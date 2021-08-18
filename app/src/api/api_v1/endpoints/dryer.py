@@ -1,6 +1,7 @@
 from typing import Any, Optional
 
 from fastapi import APIRouter, Depends
+from fastapi.param_functions import Query
 from src.api.dependencies import get_gpio_output_drivers_service
 from src.api.exceptions import EvkNameNotFound
 from src.core.configs import OperationConfig
@@ -10,9 +11,13 @@ router = APIRouter()
 
 
 @router.post("/drivers/dryers/{evk_name}/air_blast")
-def set_negative_pulse_by_evk(
+def air_blast_by_evk(
     evk_name: str,
-    width: Optional[float] = OperationConfig.config.dryer_pulse_width(),
+    width: Optional[float] = Query(
+        OperationConfig.config.dryer_pulse_default_width(),
+        gt=0,
+        lt=OperationConfig.config.dryer_pulse_maximum_width()
+    ),
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
         get_gpio_output_drivers_service
     )

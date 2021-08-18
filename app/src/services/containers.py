@@ -2,20 +2,20 @@ import dependency_injector.containers as containers
 import dependency_injector.providers as providers
 from src.services.gpio_service import GpioOutputDriversService
 from src.services.silicon_thermal_service import SiliconThermalDriversService
-from src.core.configs import Configs
+from src.core.configs import DriversConfig
 
 
 class SiliconThermalDriversContainer(containers.DeclarativeContainer):
-    config = Configs.silicon_thermals_config()
+    config = DriversConfig.silicon_thermals_config()
     service = providers.Singleton(
         SiliconThermalDriversService,
-        Configs.silicon_thermals_config
+        DriversConfig.silicon_thermals_config
     )
 
 
 class GpioDriversContainer(containers.DeclarativeContainer):
-    gpio_config = Configs.gpio_config()
+    gpio_config = DriversConfig.gpio_config()
     service = providers.Singleton(
         GpioOutputDriversService,
-        Configs.gpio_config
+        DriversConfig.gpio_config
     )

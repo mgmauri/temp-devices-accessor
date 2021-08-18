@@ -1,10 +1,9 @@
 from pydantic import BaseSettings
-import os
 
 
 class Settings(BaseSettings):
-    EVKSCONFIGFILE: str
-    PARAMSCONFIGFILE: str
+    DRIVERSCONFIGFILE: str
+    OPERATIONCONFIGFILE: str
 
 
 # FIXME env_ setting

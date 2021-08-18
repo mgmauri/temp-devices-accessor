@@ -3,7 +3,7 @@ import time
 import serial
 
 
-class SiliconThermalSerialPortDriver:
+class SerialPortSiliconThermalDriver:
     def __init__(self, port: str) -> None:
         self.dev = serial.Serial(port, write_timeout=5.0)
         self._target_temperature = None

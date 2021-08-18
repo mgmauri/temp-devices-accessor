@@ -5,6 +5,7 @@ class GpioOutputDriver:
     def __init__(self, pin_number: int) -> None:
         self._pin_number = pin_number
         self._value = None
+        self.timer = None
 
     @property
     def value(self) -> bool:
@@ -17,11 +18,12 @@ class GpioOutputDriver:
         print(f"PIN{self._pin_number}={value}")
         self._value = value
 
-    def set_value(self, value: bool) -> None:
-        self.value = value
+    def set_true_value_by_timer(self) -> None:
+        self.value = True
 
-    def negative_pulse(self, width: float = 5) -> None:
-        Timer(width, self.set_value, args=(True,)).start()
+    def negative_pulse(self, duration: float = 5) -> None:
+        # FIXME add overlaping condition
+        self.timer = Timer(duration, self.set_true_value_by_timer).start()
         self.value = False
 
     def __repr__(self) -> str:

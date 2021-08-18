@@ -13,7 +13,7 @@ router = APIRouter()
 @router.post("/drivers/dryers/{evk_name}/air_blast")
 def air_blast_by_evk(
     evk_name: str,
-    width: Optional[float] = Query(
+    duration: Optional[float] = Query(
         OperationConfig.config.dryer_pulse_default_width(),
         gt=0,
         lt=OperationConfig.config.dryer_pulse_maximum_width()
@@ -25,7 +25,7 @@ def air_blast_by_evk(
     if gpio_output_drivers_service.is_valid_evk(evk_name):
         return gpio_output_drivers_service.negative_pulse_by_evk(
             evk_name,
-            width
+            duration
         )
     else:
         raise EvkNameNotFound

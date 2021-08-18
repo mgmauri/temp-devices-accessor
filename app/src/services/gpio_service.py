@@ -21,10 +21,10 @@ class GpioOutputDriversService(base_service.BaseService):
     ) -> Optional[GpioOutputDriver]:
         return self.drivers_by_evk_name.get(evk_name, None)
 
-    def negative_pulse_by_evk(self, evk_name, width: float) -> None:
+    def negative_pulse_by_evk(self, evk_name, duration: float) -> None:
         driver = self._get_driver(evk_name)
         if driver is not None:
-            driver.negative_pulse(width)
+            driver.negative_pulse(duration)
 
     def set_value_by_evk(
         self, evk_name: str, value: bool

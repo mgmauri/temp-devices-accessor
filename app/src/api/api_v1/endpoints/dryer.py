@@ -14,9 +14,9 @@ router = APIRouter()
 def air_blast_by_evk(
     evk_name: str,
     duration: Optional[float] = Query(
-        OperationConfig.config.dryer_pulse_default_width(),
+        OperationConfig.config.air_blast_default_duration(),
         gt=0,
-        lt=OperationConfig.config.dryer_pulse_maximum_width()
+        lt=OperationConfig.config.air_blast_max_duration()
     ),
     gpio_output_drivers_service: GpioOutputDriversService = Depends(
         get_gpio_output_drivers_service

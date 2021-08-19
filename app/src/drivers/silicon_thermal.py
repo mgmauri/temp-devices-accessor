@@ -21,6 +21,7 @@ class SerialPortSiliconThermalDriver:
 
     @target_temperature.setter
     def target_temperature(self, value: float) -> None:
+        print(f"target_temperature={value}")
         self._target_temperature = value
 
     @property

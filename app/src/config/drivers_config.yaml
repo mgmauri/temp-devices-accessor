@@ -7,6 +7,9 @@
 # =================================================================
 
 evk1:
-  port: "/dev/ttyUSB1"
+  port: "/dev/ttyUSB0"
   pin_number: 31
 
+evk2: 
+  port: "/dev/ttyUSB0"
+  pin_number: 33

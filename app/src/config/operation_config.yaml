@@ -4,5 +4,5 @@ maximum_temperature: 100.0
 temperature_threshold: 0
 default_temperature: 35
 air_blast_default_duration: 10
-watchdog_interval: 20
+watchdog_interval: 120
 air_blast_max_duration: 30

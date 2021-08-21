@@ -17,7 +17,6 @@ class SerialPortSiliconThermalDriver:
 
     @target_temperature.setter
     def target_temperature(self, value: float) -> None:
-        # FIXME refactor this code
         self._target_temperature = value
         sign = "00" if value >= 0 else "FF"
         value = "%0.1f" % abs(value)

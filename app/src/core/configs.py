@@ -8,6 +8,10 @@ class DriversConfig(containers.DeclarativeContainer):
     gpio_config = providers.Configuration()
 
 
+class OperationConfig(containers.DeclarativeContainer):
+    config = providers.Configuration()
+
+
 DriversConfig.config.from_yaml(settings.DRIVERSCONFIGFILE)
 DriversConfig.silicon_thermals_config.from_dict({
         evk_name: data["port"]
@@ -17,10 +21,4 @@ DriversConfig.gpio_config.from_dict({
         evk_name: data["pin_number"]
         for evk_name, data in DriversConfig.config().items()
     })
-
-
-class OperationConfig(containers.DeclarativeContainer):
-    config = providers.Configuration()
-
-
 OperationConfig.config.from_yaml(settings.OPERATIONCONFIGFILE)

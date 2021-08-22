@@ -1,8 +1,11 @@
 import time
 from threading import Timer
 
+from src.logger import get_logger
 from src.services.gpio_service import GpioOutputDriversService
 from src.services.silicon_thermal_service import SiliconThermalDriversService
+
+logger = get_logger(__name__)
 
 
 class WatchdogService:
@@ -68,7 +71,7 @@ class WatchdogService:
         time.sleep(self.air_blast_duration)
 
     def kick(self, evk_name: str):
-        print("kick!!!")
+        logger.warning(f"{evk_name} was was kicked")
         self._close_timer(evk_name)
         self.air_blast(evk_name)
         self.silicon_thermal_drivers_service.set_target_temperature_by_evk(
@@ -80,5 +83,7 @@ class WatchdogService:
             self.timers_by_evk[evk_name].cancel()
             self.timers_by_evk[evk_name] = None
         except AttributeError:
-            # FIXME add logger!
-            print("Trying to close non existing timer")
+            logger.critical(
+                f"{evk_name} tried to close non existing timer",
+                exc_info=True
+            )

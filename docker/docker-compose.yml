@@ -7,3 +7,6 @@ services:
     command: uvicorn main:app --host 0.0.0.0
     ports:
       - 8008:8000
+    environment: 
+      - DRIVERSCONFIGFILE=${CONFIGPATH}}/config/drivers_config.yaml
+      - OPERATIONCONFIGFILE=${CONFIGPATH}}/config/operation_config.yaml

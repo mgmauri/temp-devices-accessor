@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  api:
+    build: 
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: uvicorn main:app --host 0.0.0.0
+    ports:
+      - 8008:8000

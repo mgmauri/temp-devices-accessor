@@ -1,5 +1,4 @@
 from pydantic import BaseSettings
-import os
 
 
 class Settings(BaseSettings):
@@ -8,5 +7,5 @@ class Settings(BaseSettings):
 
 
 # FIXME env_ setting
-_env = os.environ.get("PROJ_TDM") + "/.env"
+_env = "./app/src/core/.env"
 settings = Settings(_env)

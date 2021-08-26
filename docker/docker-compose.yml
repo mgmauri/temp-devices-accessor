@@ -7,9 +7,13 @@ services:
     command: uvicorn main:app --host 0.0.0.0
     ports:
       - 8008:8000
-    volumes: 
-      - ${CONFIGPATH}/config/operation_config.yaml:/home/config/drivers_config.yaml
-      - ${CONFIGPATH}/config/operation_config.yaml:/home/config/operation_config.yaml
+    volumes:
+        - type: bind
+          source: $CONFIGPATH/operation_config.yaml
+          target: /home/config/operation_config.yaml
+        - type: bind
+          source: $CONFIGPATH/drivers_config.yaml
+          target: /home/config/drivers_config.yaml
     environment: 
       - DRIVERSCONFIGFILE=/home/config/drivers_config.yaml
       - OPERATIONCONFIGFILE=/home/config/operation_config.yaml

@@ -1,7 +1,7 @@
 import random
 
-ramdom_boundary = 1
-initial_temperature = 30
+ramdom_boundary = 1.
+initial_temperature = 30.
 
 
 class SerialPortSiliconThermalDriver:

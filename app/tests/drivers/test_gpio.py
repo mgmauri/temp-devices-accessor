@@ -1,10 +1,10 @@
 import pytest
-from tests.utils import get_gpio_output_pin_numbers
+from tests.utils import gpio_output_pin_numbers
 import threading
 import time
 
 
-@pytest.mark.parametrize("pin_number", get_gpio_output_pin_numbers())
+@pytest.mark.parametrize("pin_number", gpio_output_pin_numbers())
 def test_gpio_output_true_value(
     make_gpio_output_driver,
     pin_number: int
@@ -14,7 +14,7 @@ def test_gpio_output_true_value(
     assert gpio_output_driver.value
 
 
-@pytest.mark.parametrize("pin_number", get_gpio_output_pin_numbers())
+@pytest.mark.parametrize("pin_number", gpio_output_pin_numbers())
 def test_gpio_output_false_value(
     make_gpio_output_driver,
     pin_number: int
@@ -24,7 +24,7 @@ def test_gpio_output_false_value(
     assert not gpio_output_driver.value
 
 
-@pytest.mark.parametrize("pin_number", get_gpio_output_pin_numbers())
+@pytest.mark.parametrize("pin_number", gpio_output_pin_numbers())
 def test_gpio_set_true_value(
     make_gpio_output_driver,
     pin_number
@@ -34,7 +34,7 @@ def test_gpio_set_true_value(
     assert gpio_output_driver.value
 
 
-@pytest.mark.parametrize("pin_number", get_gpio_output_pin_numbers())
+@pytest.mark.parametrize("pin_number", gpio_output_pin_numbers())
 def test_negative_pulse(
     make_gpio_output_driver,
     pin_number

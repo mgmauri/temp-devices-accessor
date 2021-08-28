@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  api:
+    build: 
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: uvicorn main:app --host 0.0.0.0
+    ports:
+      - 8008:8000
+    volumes:
+        - type: bind
+          source: $CONFIGPATH/operation_config.yaml
+          target: /home/config/operation_config.yaml
+        - type: bind
+          source: $CONFIGPATH/drivers_config.yaml
+          target: /home/config/drivers_config.yaml
+    environment: 
+      - DRIVERSCONFIGFILE=/home/config/drivers_config.yaml
+      - OPERATIONCONFIGFILE=/home/config/operation_config.yaml

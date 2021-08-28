@@ -1,14 +1,11 @@
 from typing import Dict, MutableMapping, Optional
-
-import src.services.base_service as base_service
 from src.drivers.silicon_thermal import SerialPortSiliconThermalDriver
 
 
-class SiliconThermalDriversService(base_service.BaseService):
+class SiliconThermalDriversService:
     def __init__(
         self, config_parameters: MutableMapping[int, str]
     ) -> None:
-        super().__init__()
         self.drivers_by_evk_name = {}
         for evk_name, port in config_parameters.items():
             driver = SerialPortSiliconThermalDriver(port)
@@ -17,7 +14,6 @@ class SiliconThermalDriversService(base_service.BaseService):
             except Exception:
                 raise(RuntimeError)
             self.drivers_by_evk_name[evk_name] = driver
-        # FIXME add logs
 
     def _get_driver(
         self, evk_name: str

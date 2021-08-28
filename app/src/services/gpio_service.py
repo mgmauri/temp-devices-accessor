@@ -1,20 +1,20 @@
 from typing import Dict, MutableMapping, Optional
 
-import src.services.base_service as base_service
 from src.drivers.gpio import GpioOutputDriver
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 
-class GpioOutputDriversService(base_service.BaseService):
+class GpioOutputDriversService:
     def __init__(
         self, config_parameters: MutableMapping[int, str]
     ) -> None:
-        super().__init__()
         self.drivers_by_evk_name = {}
         for evk_name, pin_number in config_parameters.items():
             self.drivers_by_evk_name[evk_name] = GpioOutputDriver(
                 pin_number
             )
-        # FIXME add logs
 
     def _get_driver(
         self, evk_name: str
@@ -25,6 +25,7 @@ class GpioOutputDriversService(base_service.BaseService):
         driver = self._get_driver(evk_name)
         if driver is not None:
             driver.negative_pulse(duration)
+            logger.warning(f"{evk_name} triggered negative pulse")
 
     def set_value_by_evk(
         self, evk_name: str, value: bool

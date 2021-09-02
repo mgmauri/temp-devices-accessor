@@ -1,0 +1,10 @@
+fastapi == 0.61
+pytest == 6.2.4
+SQLAlchemy == 1.4.22
+dependency-injector == 4.35.0
+PyYAML == 5.4.1
+requests == 2.26.0
+uvicorn == 0.14.0
+pydantic == 1.8.2
+matplotlib == 3.4.2
+pyserial == 3.5

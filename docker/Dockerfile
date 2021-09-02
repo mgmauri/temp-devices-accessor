@@ -4,15 +4,15 @@ WORKDIR /app/
 # Install Poetry
 RUN python -m pip install --upgrade pip
 
-RUN pip install poetry
+COPY ./requirements.txt /app/requirements.txt
 
-# Copy poetry.lock* in case qit doesn't exist in the repo
-COPY pyproject.toml poetry.lock* /app/
-# Disable poetry virtual envorinments
-RUN bash -c "poetry config virtualenvs.create false"
+RUN apt-get update
 
-# Allow installing dev dependencies to run tests
-RUN bash -c "poetry install --no-dev"
+RUN apt-get install gcc -y \
+    && apt-get install -y tzdata \
+    && apt-get clean
+
+RUN pip install -r /app/requirements.txt
 
 COPY ./app /app
 ENV PYTHONPATH=/app

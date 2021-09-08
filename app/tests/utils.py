@@ -19,3 +19,11 @@ def silicon_thermal_temperature_range():
         "maximum_temperature", 100
     )
     return minimum_temperature, maximum_temperature
+
+
+def gpio_evk_names() -> Iterable:
+    return DriversConfig.gpio_config().keys()
+
+
+def silicon_thermals_evk_names() -> Iterable:
+    return DriversConfig.silicon_thermals_config().keys()

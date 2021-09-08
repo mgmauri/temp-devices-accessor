@@ -23,8 +23,8 @@ class GpioOutputDriver:
 
     def negative_pulse(self, duration: float = 5) -> None:
         # FIXME add overlaping condition
-        self.timer = Timer(duration, self.set_true_value).start()
         self.value = False
+        self.timer = Timer(duration, self.set_true_value).start()
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self._pin_number})"

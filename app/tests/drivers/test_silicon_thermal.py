@@ -1,6 +1,6 @@
 import pytest
 from tests.utils import (silicon_thermal_ports,
-                         silicon_thermal_temperature_range)
+                         valid_random_temperature)
 
 silicon_thermal_timeout = 60
 
@@ -13,22 +13,18 @@ def test_is_open(make_silicon_thermal_driver, port: str):
 
 @pytest.mark.parametrize("port", silicon_thermal_ports())
 def test_target_temperature(make_silicon_thermal_driver, port: str):
-    import random
     silicon_thermal_driver = make_silicon_thermal_driver(port)
-    temperature = random.uniform(*silicon_thermal_temperature_range())
+    temperature = valid_random_temperature()
     silicon_thermal_driver.target_temperature = temperature
     assert silicon_thermal_driver.target_temperature == temperature
 
 
 @pytest.mark.parametrize("port", silicon_thermal_ports())
 def test_reached_temperature(make_silicon_thermal_driver, port: str):
-    import random
     import math
     import time
     silicon_thermal_driver = make_silicon_thermal_driver(port)
-    target_temperature = random.uniform(
-        *silicon_thermal_temperature_range()
-    )
+    target_temperature = valid_random_temperature()
     silicon_thermal_driver.target_temperature = target_temperature
     for _ in range(silicon_thermal_timeout):
         time.sleep(1)

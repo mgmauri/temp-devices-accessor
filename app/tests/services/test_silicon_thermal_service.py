@@ -1,9 +1,7 @@
 import pytest
 from tests.utils import (silicon_thermals_evk_names,
-                         silicon_thermal_temperature_range)
-
-
-silicon_thermal_timeout = 100
+                         valid_random_temperature,
+                         silicon_thermal_timeout)
 
 
 @pytest.mark.parametrize("evk_name", silicon_thermals_evk_names())
@@ -24,12 +22,9 @@ def test_set_valid_target_temperature_by_evk(
 def test_reached_temperature_by_evk(
     silicon_thermal_service, evk_name: str
 ):
-    import random
     import math
     import time
-    target_temperature = random.uniform(
-        *silicon_thermal_temperature_range()
-    )
+    target_temperature = valid_random_temperature()
     silicon_thermal_service.set_target_temperature_by_evk(
         evk_name, target_temperature
     )

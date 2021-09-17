@@ -24,7 +24,7 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-def get_logger(file_name: str) -> logging.Logger:
+def get_logger(file_name: str, logs_path: str) -> logging.Logger:
     logger = logging.getLogger(file_name)
     logger.setLevel(logging.DEBUG)
 
@@ -33,7 +33,7 @@ def get_logger(file_name: str) -> logging.Logger:
     ch.setFormatter(CustomFormatter())
     logger.addHandler(ch)
 
-    f_handler = logging.FileHandler(f"{file_name}.log")
+    f_handler = logging.FileHandler(f"{logs_path}/{file_name}.log")
     f_handler.setLevel(logging.DEBUG)
     f_format = logging.Formatter('%(asctime)s - %(name)s - \
         %(levelname)s - %(message)s')

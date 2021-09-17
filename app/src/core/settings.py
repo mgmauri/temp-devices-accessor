@@ -4,6 +4,7 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     DRIVERSCONFIGFILE: str
     OPERATIONCONFIGFILE: str
+    LOGSPATH: str
 
 
 # FIXME env_ setting

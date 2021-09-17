@@ -1,9 +1,10 @@
 from typing import Dict, MutableMapping, Optional
 
+from src.core.settings import settings
 from src.drivers.gpio import GpioOutputDriver
 from src.logger import get_logger
 
-logger = get_logger(__name__)
+logger = get_logger(__name__, settings.LOGSPATH)
 
 
 class GpioOutputDriversService:

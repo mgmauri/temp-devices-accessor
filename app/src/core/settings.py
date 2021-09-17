@@ -6,5 +6,5 @@ class Settings(BaseSettings):
     OPERATIONCONFIGFILE: str
     LOGSPATH: str
 
-
-settings = Settings()
+_env = "./app/src/core/.env"
+settings = Settings(_env)

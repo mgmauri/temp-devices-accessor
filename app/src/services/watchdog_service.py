@@ -1,12 +1,11 @@
 import time
 from threading import Timer
 
-from src.core.settings import settings
 from src.logger import get_logger
 from src.services.gpio_service import GpioOutputDriversService
 from src.services.silicon_thermal_service import SiliconThermalDriversService
 
-logger = get_logger(__name__, settings.LOGSPATH)
+logger = get_logger(__name__)
 
 
 class WatchdogService:

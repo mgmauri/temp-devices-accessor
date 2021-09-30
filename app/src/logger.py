@@ -1,5 +1,9 @@
 import logging
 
+from src.core.settings import settings
+
+logs_path = settings.LOGSPATH
+
 
 class CustomFormatter(logging.Formatter):
     grey = "\x1b[38;21m"
@@ -24,7 +28,7 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-def get_logger(file_name: str, logs_path: str) -> logging.Logger:
+def get_logger(file_name: str) -> logging.Logger:
     logger = logging.getLogger(file_name)
     logger.setLevel(logging.DEBUG)
 

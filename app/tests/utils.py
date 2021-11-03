@@ -4,15 +4,9 @@ from src.core.configs import OperationConfig
 import random
 
 silicon_thermal_timeout = 100  # FIXME add config
-maximum_temperature = OperationConfig.config().get(
-        "maximum_temperature", 100
-    )
-minimum_temperature = OperationConfig.config().get(
-        "minimum_temperature", 0
-    )
-temperature_threshold = OperationConfig.config.get(
-        "temperature_threshold", 0
-    )
+maximum_temperature = OperationConfig.config().get("maximum_temperature", 100)
+minimum_temperature = OperationConfig.config().get("minimum_temperature", 0)
+temperature_threshold = OperationConfig.config.get("temperature_threshold", 0)
 
 
 def gpio_output_pin_numbers() -> Iterable:
@@ -32,18 +26,12 @@ def silicon_thermals_evk_names() -> Iterable:
 
 
 def valid_random_temperature() -> float:
-    return random.uniform(
-        minimum_temperature, maximum_temperature
-    )
+    return random.uniform(minimum_temperature, maximum_temperature)
 
 
 def above_threshold_random_temperature() -> float:
-    return random.uniform(
-        temperature_threshold, maximum_temperature
-    )
+    return random.uniform(temperature_threshold, maximum_temperature)
 
 
 def below_threshold_random_temperature() -> float:
-    return random.uniform(
-        minimum_temperature, temperature_threshold
-    )
+    return random.uniform(minimum_temperature, temperature_threshold)

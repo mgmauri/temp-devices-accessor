@@ -8,7 +8,7 @@ import time
 def test_negative_pulse_by_evk(gpio_service, evk_name: str):
     thread = threading.Thread(
         target=gpio_service.negative_pulse_by_evk,
-        args=(evk_name, 2)  # FIXME add config
+        args=(evk_name, 2),  # FIXME add config
     )
     thread.start()
     time.sleep(1)

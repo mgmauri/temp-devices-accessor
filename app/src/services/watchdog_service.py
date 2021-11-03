@@ -16,7 +16,7 @@ class WatchdogService:
         watchdog_interval: float,
         air_blast_duration: float,
         temperature_threshold: float,
-        default_temperature: float
+        default_temperature: float,
     ) -> None:
         self.silicon_thermal_drivers_service = silicon_thermal_drivers_service
         self.gpio_output_drivers_service = gpio_output_drivers_service
@@ -29,9 +29,7 @@ class WatchdogService:
     def is_valid_evk(self, evk_name: str) -> bool:
         return self.silicon_thermal_drivers_service.is_valid_evk(evk_name)
 
-    def set_target_temperature_by_evk(
-        self, evk_name: str, temperature: float
-    ) -> None:
+    def set_target_temperature_by_evk(self, evk_name: str, temperature: float) -> None:
         if temperature < self.temperature_threshold:
             self.execute_at_under_threshold_temperature(evk_name, temperature)
         else:
@@ -43,26 +41,25 @@ class WatchdogService:
         timer = self.timers_by_evk.get(evk_name, None)
         if timer is None:
             self.timers_by_evk[evk_name] = Timer(
-                interval=self.watchdog_interval,
-                function=self.kick,
-                args=(evk_name,)
+                interval=self.watchdog_interval, function=self.kick, args=(evk_name,)
             )
             self.timers_by_evk[evk_name].start()
         self.silicon_thermal_drivers_service.set_target_temperature_by_evk(
-                evk_name, temperature
+            evk_name, temperature
         )
 
     def execute_at_above_threshold_temperature(
         self, evk_name: str, temperature: float
     ) -> None:
-        target_temperature = self.silicon_thermal_drivers_service.\
-            get_target_temperature_by_evk(evk_name)
+        target_temperature = (
+            self.silicon_thermal_drivers_service.get_target_temperature_by_evk(evk_name)
+        )
         if target_temperature < 0:
             self._close_timer(evk_name)
             self.air_blast(evk_name)
         self.silicon_thermal_drivers_service.set_target_temperature_by_evk(
-                evk_name, temperature
-            )
+            evk_name, temperature
+        )
 
     def air_blast(self, evk_name: str) -> None:
         self.gpio_output_drivers_service.negative_pulse_by_evk(
@@ -75,8 +72,8 @@ class WatchdogService:
         self._close_timer(evk_name)
         self.air_blast(evk_name)
         self.silicon_thermal_drivers_service.set_target_temperature_by_evk(
-                evk_name, self.default_temperature
-            )
+            evk_name, self.default_temperature
+        )
 
     def _close_timer(self, evk_name: str) -> None:
         try:
@@ -84,6 +81,5 @@ class WatchdogService:
             self.timers_by_evk[evk_name] = None
         except AttributeError:
             logger.critical(
-                f"{evk_name} tried to close non existing timer",
-                exc_info=True
+                f"{evk_name} tried to close non existing timer", exc_info=True
             )

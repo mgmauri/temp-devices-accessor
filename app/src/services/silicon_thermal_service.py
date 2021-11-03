@@ -3,26 +3,20 @@ from src.drivers.silicon_thermal import SerialPortSiliconThermalDriver
 
 
 class SiliconThermalDriversService:
-    def __init__(
-        self, config_parameters: MutableMapping[int, str]
-    ) -> None:
+    def __init__(self, config_parameters: MutableMapping[int, str]) -> None:
         self.drivers_by_evk_name = {}
         for evk_name, port in config_parameters.items():
             driver = SerialPortSiliconThermalDriver(port)
             try:
                 driver.connected = True
             except Exception:
-                raise(RuntimeError)
+                raise (RuntimeError)
             self.drivers_by_evk_name[evk_name] = driver
 
-    def _get_driver(
-        self, evk_name: str
-    ) -> Optional[SerialPortSiliconThermalDriver]:
+    def _get_driver(self, evk_name: str) -> Optional[SerialPortSiliconThermalDriver]:
         return self.drivers_by_evk_name.get(evk_name, None)
 
-    def set_target_temperature_by_evk(
-        self, evk_name: str, temperature: float
-    ) -> None:
+    def set_target_temperature_by_evk(self, evk_name: str, temperature: float) -> None:
         driver = self._get_driver(evk_name)
         if driver is not None:
             driver.target_temperature = temperature

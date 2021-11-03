@@ -1,6 +1,8 @@
-from src.services.containers import (GpioDriversContainer,
-                                     SiliconThermalDriversContainer,
-                                     WatchdogContainer)
+from src.services.containers import (
+    GpioDriversContainer,
+    SiliconThermalDriversContainer,
+    WatchdogContainer,
+)
 
 
 def test_silicon_thermals_drivers_container():

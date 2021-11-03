@@ -7,18 +7,12 @@ logger = get_logger(__name__)
 
 
 class GpioOutputDriversService:
-    def __init__(
-        self, config_parameters: MutableMapping[int, str]
-    ) -> None:
+    def __init__(self, config_parameters: MutableMapping[int, str]) -> None:
         self.drivers_by_evk_name = {}
         for evk_name, pin_number in config_parameters.items():
-            self.drivers_by_evk_name[evk_name] = GpioOutputDriver(
-                pin_number
-            )
+            self.drivers_by_evk_name[evk_name] = GpioOutputDriver(pin_number)
 
-    def _get_driver(
-        self, evk_name: str
-    ) -> Optional[GpioOutputDriver]:
+    def _get_driver(self, evk_name: str) -> Optional[GpioOutputDriver]:
         return self.drivers_by_evk_name.get(evk_name, None)
 
     def negative_pulse_by_evk(self, evk_name, duration: float) -> None:
@@ -27,16 +21,12 @@ class GpioOutputDriversService:
             driver.negative_pulse(duration)
             logger.warning(f"{evk_name} triggered negative pulse")
 
-    def set_value_by_evk(
-        self, evk_name: str, value: bool
-    ) -> None:
+    def set_value_by_evk(self, evk_name: str, value: bool) -> None:
         driver = self._get_driver(evk_name)
         if driver is not None:
             driver.value = value
 
-    def get_value_by_evk(
-        self, evk_name: str
-    ) -> Optional[bool]:
+    def get_value_by_evk(self, evk_name: str) -> Optional[bool]:
         driver = self._get_driver(evk_name)
         if driver is not None:
             return driver.value

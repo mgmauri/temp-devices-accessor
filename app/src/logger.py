@@ -19,7 +19,7 @@ class CustomFormatter(logging.Formatter):
         logging.INFO: grey + format + reset,
         logging.WARNING: yellow + format + reset,
         logging.ERROR: red + format + reset,
-        logging.CRITICAL: bold_red + format + reset
+        logging.CRITICAL: bold_red + format + reset,
     }
 
     def format(self, record):
@@ -39,8 +39,10 @@ def get_logger(file_name: str) -> logging.Logger:
 
     f_handler = logging.FileHandler(f"{logs_path}/{file_name}.log")
     f_handler.setLevel(logging.DEBUG)
-    f_format = logging.Formatter('%(asctime)s - %(name)s - \
-        %(levelname)s - %(message)s')
+    f_format = logging.Formatter(
+        "%(asctime)s - %(name)s - \
+        %(levelname)s - %(message)s"
+    )
     f_handler.setFormatter(f_format)
     logger.addHandler(f_handler)
 

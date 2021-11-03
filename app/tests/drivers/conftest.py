@@ -16,4 +16,5 @@ def make_gpio_output_driver() -> GpioOutputDriver:
 def make_silicon_thermal_driver():
     def _make_silicon_thermal_driver(port):
         return SerialPortSiliconThermalDriver(port)
+
     return _make_silicon_thermal_driver

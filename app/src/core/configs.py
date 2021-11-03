@@ -13,12 +13,10 @@ class OperationConfig(containers.DeclarativeContainer):
 
 
 DriversConfig.config.from_yaml(settings.DRIVERSCONFIGFILE)
-DriversConfig.silicon_thermals_config.from_dict({
-        evk_name: data["port"]
-        for evk_name, data in DriversConfig.config().items()
-    })
-DriversConfig.gpio_config.from_dict({
-        evk_name: data["pin_number"]
-        for evk_name, data in DriversConfig.config().items()
-    })
+DriversConfig.silicon_thermals_config.from_dict(
+    {evk_name: data["port"] for evk_name, data in DriversConfig.config().items()}
+)
+DriversConfig.gpio_config.from_dict(
+    {evk_name: data["pin_number"] for evk_name, data in DriversConfig.config().items()}
+)
 OperationConfig.config.from_yaml(settings.OPERATIONCONFIGFILE)

@@ -9,17 +9,13 @@ from src.services.watchdog_service import WatchdogService
 class SiliconThermalDriversContainer(containers.DeclarativeContainer):
     config = DriversConfig.silicon_thermals_config()
     service = providers.Singleton(
-        SiliconThermalDriversService,
-        DriversConfig.silicon_thermals_config
+        SiliconThermalDriversService, DriversConfig.silicon_thermals_config
     )
 
 
 class GpioDriversContainer(containers.DeclarativeContainer):
     gpio_config = DriversConfig.gpio_config()
-    service = providers.Singleton(
-        GpioOutputDriversService,
-        DriversConfig.gpio_config
-    )
+    service = providers.Singleton(GpioOutputDriversService, DriversConfig.gpio_config)
 
 
 class WatchdogContainer(containers.DeclarativeContainer):
@@ -32,5 +28,5 @@ class WatchdogContainer(containers.DeclarativeContainer):
         air_blast_duration=OperationConfig.config.air_blast_default_duration,
         watchdog_interval=OperationConfig.config.watchdog_interval,
         temperature_threshold=OperationConfig.config.temperature_threshold,
-        default_temperature=OperationConfig.config.default_temperature
+        default_temperature=OperationConfig.config.default_temperature,
     )

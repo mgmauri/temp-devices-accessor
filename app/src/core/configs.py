@@ -12,6 +12,10 @@ class OperationConfig(containers.DeclarativeContainer):
     config = providers.Configuration()
 
 
+class EmailConfig(containers.DeclarativeContainer):
+    config = providers.Configuration()
+
+
 DriversConfig.config.from_yaml(settings.DRIVERSCONFIGFILE)
 DriversConfig.silicon_thermals_config.from_dict(
     {evk_name: data["port"] for evk_name, data in DriversConfig.config().items()}
@@ -20,3 +24,4 @@ DriversConfig.gpio_config.from_dict(
     {evk_name: data["pin_number"] for evk_name, data in DriversConfig.config().items()}
 )
 OperationConfig.config.from_yaml(settings.OPERATIONCONFIGFILE)
+EmailConfig.config.from_yaml(settings.EMAILCONFIGFILE)

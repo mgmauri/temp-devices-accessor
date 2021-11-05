@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 from fastapi import APIRouter, Depends
 from fastapi.param_functions import Query
@@ -22,10 +22,13 @@ def set_target_temperature_by_evk(
         gt=OperationConfig.config.minimum_temperature(),
         lt=OperationConfig.config.maximum_temperature(),
     ),
+    user: Optional[str] = None,
     watchdog_service: WatchdogService = Depends(get_watchdog_service),
 ) -> Any:
     if watchdog_service.is_valid_evk(evk_name):
-        return watchdog_service.set_target_temperature_by_evk(evk_name, temperature)
+        return watchdog_service.set_target_temperature_by_evk(
+            evk_name, temperature, user
+        )
     else:
         raise EvkNameNotFound
 

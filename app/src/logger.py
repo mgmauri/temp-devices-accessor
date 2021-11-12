@@ -1,5 +1,9 @@
 import logging
 
+from src.core.settings import settings
+
+logs_path = settings.LOGSPATH
+
 
 class CustomFormatter(logging.Formatter):
     grey = "\x1b[38;21m"
@@ -33,7 +37,7 @@ def get_logger(file_name: str) -> logging.Logger:
     ch.setFormatter(CustomFormatter())
     logger.addHandler(ch)
 
-    f_handler = logging.FileHandler(f"{file_name}.log")
+    f_handler = logging.FileHandler(f"{logs_path}/{file_name}.log")
     f_handler.setLevel(logging.DEBUG)
     f_format = logging.Formatter('%(asctime)s - %(name)s - \
         %(levelname)s - %(message)s')

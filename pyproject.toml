@@ -14,7 +14,6 @@ PyYAML = "^5.4.1"
 requests = "^2.26.0"
 uvicorn = "^0.14.0"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
-matplotlib = "^3.4.2"
 pyserial = "^3.5"
 
 [tool.poetry.dev-dependencies]
@@ -22,6 +21,12 @@ flake8 = "^3.9.2"
 jupyter = "^1.0.0"
 matplotlib = "^3.4.2"
 autopep8 = "^1.5.7"
+pytest-cov = "^2.12.1"
+black = "^21.10b0"
+pynvim = "^0.4.3"
+pylint = "^2.11.1"
+isort = "^5.10.0"
+ipdb = "^0.13.9"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

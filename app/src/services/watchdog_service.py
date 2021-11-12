@@ -4,6 +4,8 @@ from threading import Timer
 from src.logger import get_logger
 from src.services.gpio_service import GpioOutputDriversService
 from src.services.silicon_thermal_service import SiliconThermalDriversService
+from src.services.email_service import send_warning_to_gmail_user
+
 
 logger = get_logger(__name__)
 
@@ -25,13 +27,16 @@ class WatchdogService:
         self.temperature_threshold = temperature_threshold
         self.default_temperature = default_temperature
         self.timers_by_evk = {}
+        self.users_by_evk = {}
 
     def is_valid_evk(self, evk_name: str) -> bool:
         return self.silicon_thermal_drivers_service.is_valid_evk(evk_name)
 
     def set_target_temperature_by_evk(
-        self, evk_name: str, temperature: float
+        self, evk_name: str, temperature: float, user: str = None
     ) -> None:
+        if user is not None:
+            self.users_by_evk[evk_name] = user
         if temperature < self.temperature_threshold:
             self.execute_at_under_threshold_temperature(evk_name, temperature)
         else:
@@ -77,6 +82,8 @@ class WatchdogService:
         self.silicon_thermal_drivers_service.set_target_temperature_by_evk(
                 evk_name, self.default_temperature
             )
+        if self.users_by_evk.get(evk_name, None) is not None:
+            send_warning_to_gmail_user(self.users_by_evk[evk_name])
 
     def _close_timer(self, evk_name: str) -> None:
         try:
